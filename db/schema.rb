@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -16,49 +15,49 @@ ActiveRecord::Schema.define(version: 20170601051516) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "categories", force: true do |t|
-    t.string "name"
-    t.string "slug"
+  create_table "categories", id: :serial, force: :cascade do |t|
+    t.string "name", limit: 255
+    t.string "slug", limit: 255
   end
 
-  create_table "comments", force: true do |t|
-    t.text     "body"
+  create_table "comments", id: :serial, force: :cascade do |t|
+    t.text "body"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.integer  "post_id"
+    t.integer "user_id"
+    t.integer "post_id"
   end
 
-  create_table "post_categories", force: true do |t|
+  create_table "post_categories", id: :serial, force: :cascade do |t|
     t.integer "post_id"
     t.integer "category_id"
   end
 
-  create_table "posts", force: true do |t|
-    t.string   "url"
-    t.string   "title"
-    t.text     "description"
+  create_table "posts", id: :serial, force: :cascade do |t|
+    t.string "url", limit: 255
+    t.string "title", limit: 255
+    t.text "description"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
-    t.string   "slug"
+    t.integer "user_id"
+    t.string "slug", limit: 255
   end
 
-  create_table "users", force: true do |t|
-    t.string   "username"
+  create_table "users", id: :serial, force: :cascade do |t|
+    t.string "username", limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "password_digest"
-    t.string   "slug"
-    t.string   "role"
-    t.string   "time_zone"
+    t.string "password_digest", limit: 255
+    t.string "slug", limit: 255
+    t.string "role", limit: 255
+    t.string "time_zone", limit: 255
   end
 
-  create_table "votes", force: true do |t|
-    t.boolean  "vote"
-    t.integer  "user_id"
-    t.string   "voteable_type"
-    t.integer  "voteable_id"
+  create_table "votes", id: :serial, force: :cascade do |t|
+    t.boolean "vote"
+    t.integer "user_id"
+    t.string "voteable_type", limit: 255
+    t.integer "voteable_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
