@@ -1,5 +1,4 @@
-class AddFkForComments < ActiveRecord::Migration
-  def change
+class AddFkForComments < activeRecord::Migration[5.1]
     add_column :comments, :user_id, :integer
     add_column :comments, :post_id, :integer
   end
