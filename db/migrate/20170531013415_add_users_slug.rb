@@ -1,4 +1,4 @@
-class AddUsersSlug < activeRecord::Migration[5.1]
+class AddUsersSlug < activeRecord::Migration
   def change
     add_column :users, :slug, :string
   end

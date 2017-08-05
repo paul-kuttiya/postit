@@ -1,4 +1,4 @@
-class AddCategoriesSlug < activeRecord::Migration[5.1]
+class AddCategoriesSlug < activeRecord::Migration
   def change
     add_column :categories, :slug, :string
   end

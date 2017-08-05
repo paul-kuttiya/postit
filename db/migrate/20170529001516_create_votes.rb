@@ -1,4 +1,4 @@
-class CreateVotes < activeRecord::Migration[5.1]
+class CreateVotes < activeRecord::Migration
   def change
     create_table :votes do |t|
       t.boolean :vote
