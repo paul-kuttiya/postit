@@ -1,4 +1,4 @@
-class AddTimeZonesToUsers < activeRecord::Migration
+class AddTimeZonesToUsers < ActiveRecord::Migration
   def change
     add_column :users, :time_zone, :string
   end
