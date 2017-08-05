@@ -1,0 +1,7 @@
+= render '/shared/content_title', title: "New Category"
+.well
+  = form_for @category do |f|
+    .control-group
+      = f.label :name
+      = f.text_field :name
+    = f.submit "Create", class: "btn btn-success"

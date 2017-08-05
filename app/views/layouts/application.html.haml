@@ -1,0 +1,17 @@
+!!! 5
+%html(lang="en-US")
+  %head
+    %title BlogPosts
+    %meta(charset="UTF-8")
+    %meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    = csrf_meta_tag
+    = stylesheet_link_tag "application"
+    = javascript_include_tag "application"
+    = yield(:head)
+  %body
+    = render 'layouts/header'
+    #main_content.container
+      = render 'layouts/messages'
+      #content.col-md-9.center-block
+        = yield
+    %footer

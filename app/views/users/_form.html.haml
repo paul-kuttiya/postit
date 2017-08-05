@@ -1,0 +1,15 @@
+.well
+  = form_for @user do |f|
+    .control-group
+      = f.label :username
+      = f.text_field :username
+    .control-group
+      = f.label :password
+      = f.password_field :password
+    .control-group
+      = f.label :time_zone
+      = f.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, default: Time.zone.name
+    .control-group
+      = f.submit(@user.new_record? ? "Register" : "Edit", class: 'btn btn-success')
+      - unless logged_in?
+        = link_to "Login", login_path

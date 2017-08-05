@@ -1,0 +1,17 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: postit_blog_dev
+  host: localhost
+  pool: 5
+  username: pkuttiya
+  password: p053851238
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: postit_blog_test
+  host: localhost
+  pool: 5
+  username: pkuttiya
+  password: p053851238

@@ -1,0 +1,23 @@
+.row
+  .span0.well.text-center
+    - if logged_in?
+      = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true' do
+        %i.icon-arrow-up
+      %br/
+    %span{:id => "post_votes_#{post.id}"}= post.total_votes
+    Votes
+    - if logged_in?
+      %br/
+      = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true'  do
+        %i.icon-arrow-down
+  .span8.well
+    = render(post.categories) || "<h6>No category</h6>".html_safe
+    %h4= link_to post.title, post.url
+    %p= post.description
+    %p
+      %span.quiet
+        posted by #{link_to post.creator.username, post_path(post)}
+      %small
+        at #{display_datetime(post.created_at)}
+    %span
+      = link_to("#{post.comments.size} comments", post_path(post))

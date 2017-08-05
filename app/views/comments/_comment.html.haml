@@ -1,0 +1,24 @@
+- show_post ||= false
+.row
+  .span0.well.text-center
+    - if logged_in?
+      = link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true do
+        %i.icon-arrow-up
+      %br/
+    %span{:id => "comment_votes_#{comment.id}"}= comment.total_votes
+    Votes
+    - if logged_in?
+      %br/
+      = link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true do
+        %i.icon-arrow-down
+  .span4.well
+    - if show_post
+      %p
+        on
+        %em= link_to comment.post.title, post_path(comment.post)
+    %em= comment.body
+    %p
+      %span.quiet
+        posted by #{link_to(comment.creator.username, user_path(comment.creator))}
+      %small
+        at #{comment.created_at}

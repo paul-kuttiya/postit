@@ -1,0 +1,30 @@
+.page-header
+  %h1
+    %a{:href => "link"}
+    %br
+    %small.text-primary Submitted by user something
+.btn-group
+  = link_to 'Visit URL', "#", class: "btn btn-primary"
+.btn-group.pull-right
+  = link_to "#", method: :put, class: "btn btn-default btn-sm" do
+    %span.glyphicon.glyphicon-chevron-up
+    Upvote 3
+    
+  = link_to "#", method: :put, class: "btn btn-default btn-sm" do
+    %span.glyphicon.glyphicon-chevron-down
+      Downvote 2
+      
+.btn-group
+  = link_to 'Edit', "#", class: "btn btn-default"
+  = link_to 'Destroy', "#", data: { confirm: 'Are you sure?' }, class: "btn btn-default"
+
+%h3.comments_title 2 comments
+
+#comments
+  = render "comment"
+
+%form
+  .form-group
+    %label{:for => "exampleTextarea"} Post Your comment
+    %textarea#exampleTextarea.form-control{:rows => "3"}
+  %button.btn.btn-primary{:type => "submit"} Submit

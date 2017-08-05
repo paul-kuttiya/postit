@@ -1,0 +1,23 @@
+= render '/shared/content_title', title: "Profile #{@user.username}"
+%p
+  [#{link_to "edit_user", edit_user_path(@user)}]
+.well
+  %dl.dl-horizontal
+    %dt Username:
+    %dd= @user.username
+%h5
+  = @user.username
+  's Activity
+%ul.nav.nav-tabs
+  %li{:class => "<haml_loud"}
+    "active" if params[:tab].nil? &gt;
+    \#{link_to "Posts (#{@user.posts.size})", user_path(@user)}
+  %li{:class => "<haml_loud"}
+    "active" if params[:tab] == "comments" &gt;
+    \#{link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments')}
+- if params[:tab].nil?
+  - @user.posts.each do |post|
+    = render '/posts/post', post: post
+- elsif params[:tab] == "comments"
+  - @user.comments.each do |comment|
+    = render '/comments/comment', comment: comment, show_post: true
