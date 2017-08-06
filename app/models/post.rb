@@ -4,8 +4,8 @@ class Post < ActiveRecord::Base
   #set creator virtual attributes from User class to Post model
   belongs_to :creator, class_name: "User", foreign_key: "user_id"
   has_many :comments
-  has_many :post_categories
-  has_many :categories, through: :post_categories
+  has_many :post_categories, dependent:  :destroy
+  has_many :categories, -> { distinct }, through: :post_categories
   
   validates :title, :url, :description, presence: true
 

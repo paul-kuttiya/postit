@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.all.sort_by{|x| x.votes.size}.reverse
+    @posts = Post.all.sort_by{|x| x.votes.size}.reverse.first(10)
   end
 
   def show

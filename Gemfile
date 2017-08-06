@@ -18,6 +18,8 @@ gem 'fabrication'
 gem 'haml'
 gem 'jquery-rails'
 gem 'turbolinks'
+gem 'devicon-rails'
+gem 'data-confirm-modal'
 
 group :doc do
   gem 'sdoc', require: false

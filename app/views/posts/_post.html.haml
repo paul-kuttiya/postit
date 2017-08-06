@@ -1,23 +1,25 @@
-.row
-  .span0.well.text-center
-    - if logged_in?
-      = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true' do
-        %i.icon-arrow-up
-      %br/
-    %span{:id => "post_votes_#{post.id}"}= post.total_votes
-    Votes
-    - if logged_in?
-      %br/
-      = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true'  do
-        %i.icon-arrow-down
-  .span8.well
-    = render(post.categories) || "<h6>No category</h6>".html_safe
-    %h4= link_to post.title, post.url
-    %p= post.description
-    %p
-      %span.quiet
-        posted by #{link_to post.creator.username, post_path(post)}
-      %small
-        at #{display_datetime(post.created_at)}
-    %span
-      = link_to("#{post.comments.size} comments", post_path(post))
+.post.row.clearfix
+  %h2.text-primary
+    = link_to post.title, post
+  = link_to "Visit Link", post.url, class: "btn btn-default btn-sm", target: "_blank"
+  %small.author.text-muted
+    Submitted #{time_ago_in_words(post.created_at)} ago
+    by #{link_to post.creator.username, post.creator}
+  %br
+  %p.text-default= post.description
+  %h2.post-categories
+    = render post.categories || "<h6>No category</h6>".html_safe
+  
+  .post_info
+    %small.text-primary{id: "post_votes_#{post.id}"}
+      = fa_icon "user-o"
+      #{post.total_votes} votes
+    = link_to post, class: "text-muted" do
+      = fa_icon "comment-o"
+      %span.text-info #{post.comments.size}
+    = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true' do
+      = fa_icon "thumbs-o-up"
+      %span.text-success +12
+    = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true', class: "text-danger" do
+      = fa_icon "thumbs-o-down"
+      %span.text-warning -13

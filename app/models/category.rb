@@ -4,7 +4,7 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
-  after_validation :generate_slug
+  before_create :generate_slug
 
   def generate_slug
     self.slug = self.name.gsub(/\W/, '-').downcase

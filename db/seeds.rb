@@ -8,7 +8,7 @@ Fabricate(:user,
   Fabricate(:user)
 end
 
-cat = ["Ruby on Rails", "Javascript", "Python", "HTML", "CSS"]
+cat = ["ruby", "rails", "python", "html5", "css3", "bootstrap"]
 
 cat.each do |c|
   Fabricate(:category, name: c)

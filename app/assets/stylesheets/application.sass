@@ -1,17 +1,29 @@
-//font-awesome
-@import "font-awesome"
-
 //Import bootstrap-sprockets
 @import "bootstrap-sprockets"
 
 // Import theme variables
 @import "bootswatch/readable/variables"
 
-// bootstrap itself
+// Bootstrap
 @import "bootstrap"
 
-// And finally bootswatch style itself
+// Bootswatch style
 @import "bootswatch/readable/bootswatch"
+
+//font-awesome
+@import "font-awesome"
+
+//devicon
+@import "devicon"
+// @import "devicon-colors"
+
+$list-hover: rgba(245, 245, 245, 0.55)
+
+small.author
+	font-style: italic
+	display: inline-block	
+	width: 100%
+	padding: 0.75em 0 0 0
 
 #logo 
 	font-size: 26px
@@ -21,22 +33,31 @@
 	padding: 15px 0
 	a 
 		color: #2F363E
-	
-#main_content 
+
+#main_content
+	padding-bottom: 100px
+
+	a:hover
+			text-decoration: none
+			cursor: pointer	
+
 	#content 
 		float: none
+
+		form
+			padding: 2em 0 0 0
 	
-	padding-bottom: 100px
-	.link 
+	.post
 		padding: 2em 1em
 		border-bottom: 1px solid #e9e9e9
+		&:nth-child(even)
+			background-color: $list-hover 
 		.title 
-
 			a 
 				color: #FF4500
-			
-		
-	
+		h2.post-categories
+			margin-bottom: 22px
+
 	.comments_title 
 		margin-top: 2em
 	
@@ -47,6 +68,12 @@
 			.lead 
 				margin-bottom: 0
 
+.post_info, .comment_info
+	padding: 0 0 1em 0
+
+	p, a
+		padding: 0.5em
+
 .comments_title
 	padding-bottom: 0.5em
 	border-bottom: 1px solid #e7e7e7
@@ -55,4 +82,7 @@
 	padding: 1em
 
 	&:nth-child(odd)
-		background-color: rgba(231, 231, 231, 0.3)
+		background-color: $list-hover 
+
+	.comment_vote
+		padding: 0.5em 0 0 0
