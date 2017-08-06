@@ -1,12 +1,10 @@
 = render '/shared/content_title', title: "Login"
+
 .well
-  = form_tag '/login'
-  .control-group
-    = label_tag :username
-    = text_field_tag :username, params[:username] || ''
-  .control-group
-    = label_tag :password
-    = password_field_tag :password, params[:password] || ''
-  .control-group
-    = submit_tag "Login", class: 'btn btn-success'
-    = link_to "Register", register_path
+  = bootstrap_form_tag url: '/login', layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-4" do |f|
+    = f.text_field :username
+    = f.password_field :password
+    = f.form_group do
+      = f.submit "Login", class: 'btn btn-success'
+      = link_to "Register", register_path
+      

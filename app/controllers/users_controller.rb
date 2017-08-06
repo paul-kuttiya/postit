@@ -15,22 +15,16 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id
       redirect_to root_path
     else
-      flash[:error] = @user.errors.full_messages
-      redirect_to register_path
+      render :new
     end
   end
-
-  def show; end
-
-  def edit; end
 
   def update
     if @user.update(user_params)
       flash[:notice] = "Update profile"
       redirect_to user_path(@user)
     else
-      flash[:error] = @user.errors.full_messages
-      redirect_to edit_user_path
+      render :edit
     end
   end
 

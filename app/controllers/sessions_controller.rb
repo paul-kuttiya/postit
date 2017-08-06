@@ -1,8 +1,6 @@
 class SessionsController < ApplicationController
   before_action :require_new_user, only: [:new]
 
-  def new; end
-
   def create
     user = User.find_by(username: params[:username])
 

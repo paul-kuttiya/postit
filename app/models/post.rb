@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   
   validates :title, :url, :description, presence: true
 
-  after_validation :generate_slug
+  before_create :generate_slug
 
   def generate_slug
     self.slug = self.title.gsub(/\W/, '-').downcase
