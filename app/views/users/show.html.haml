@@ -1,23 +1,25 @@
 = render '/shared/content_title', title: "Profile #{@user.username}"
 %p
   [#{link_to "edit_user", edit_user_path(@user)}]
-.well
-  %dl.dl-horizontal
-    %dt Username:
-    %dd= @user.username
-%h5
-  = @user.username
-  's Activity
-%ul.nav.nav-tabs
-  %li{:class => "<haml_loud"}
-    "active" if params[:tab].nil? &gt;
-    \#{link_to "Posts (#{@user.posts.size})", user_path(@user)}
-  %li{:class => "<haml_loud"}
-    "active" if params[:tab] == "comments" &gt;
-    \#{link_to "Comments (#{@user.comments.size})", user_path(@user, tab: 'comments')}
-- if params[:tab].nil?
-  - @user.posts.each do |post|
-    = render '/posts/post', post: post
-- elsif params[:tab] == "comments"
-  - @user.comments.each do |comment|
-    = render '/comments/comment', comment: comment, show_post: true
+.row
+  .col-md-12.col-sm-12.profile_wrapper
+    .card.hovercard
+      .card-background
+        %img.card-bkimg(src="http://lorempixel.com/100/100/people/6/")
+      .useravatar
+        %img(src="http://lorempixel.com/100/100/people/6/")
+      .card-info
+        %span.card-title= @user.username
+    .btn-pref.btn-group.btn-group-justified.btn-group-lg
+      .btn-group
+        = link_to "Posts (#{@user.posts.length})", @user, class: (params[:tab].nil? ? "btn btn-primary" : "btn btn-default")
+      .btn-group  
+        = link_to "Comments (#{@user.comments.length})", user_path(@user, tab: "comments"), class: params[:tab] == "comments" ? "btn btn-primary" : "btn btn-default"
+
+    .col-md-12.col-sm-12
+      - if params[:tab].nil?
+        - @user.posts.each do |post|
+          = render '/posts/post', post: post
+      - elsif params[:tab] == "comments"
+        - @user.comments.each do |comment|
+          = render '/comments/comment', comment: comment, show_post: true

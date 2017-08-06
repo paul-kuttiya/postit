@@ -4,7 +4,7 @@ Fabricate(:user,
     role: "admin"
   )
 
-49.times do
+10.times do
   Fabricate(:user)
 end
 
@@ -14,11 +14,11 @@ cat.each do |c|
   Fabricate(:category, name: c)
 end
 
-30.times do
+60.times do
   Fabricate(:post, user_id: User.all.sample.id)
 end
 
-100.times do
+200.times do
   PostCategory.create(
     post: Post.all.sample, category: Category.all.sample
   )

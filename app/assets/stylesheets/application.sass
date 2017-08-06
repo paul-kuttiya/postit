@@ -2,13 +2,13 @@
 @import "bootstrap-sprockets"
 
 // Import theme variables
-@import "bootswatch/readable/variables"
+@import "bootswatch/spacelab/variables"
 
 // Bootstrap
 @import "bootstrap"
 
 // Bootswatch style
-@import "bootswatch/readable/bootswatch"
+@import "bootswatch/spacelab/bootswatch"
 
 //font-awesome
 @import "font-awesome"
@@ -17,13 +17,15 @@
 @import "devicon"
 // @import "devicon-colors"
 
+@import "./*"
+
 $list-hover: rgba(245, 245, 245, 0.55)
 
 small.author
 	font-style: italic
 	display: inline-block	
 	width: 100%
-	padding: 0.75em 0 0 0
+	padding: 0.75em 0
 
 #logo 
 	font-size: 26px
@@ -55,7 +57,7 @@ small.author
 		.title 
 			a 
 				color: #FF4500
-		h2.post-categories
+		h2.text-primary, h2.post-categories
 			margin-bottom: 22px
 
 	.comments_title 
