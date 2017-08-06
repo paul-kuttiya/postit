@@ -1,6 +1,5 @@
 PostitTemplate::Application.routes.draw do
   root to: 'posts#index'
-
   get '/ui(/:action)', controller: 'ui'
 
   resources :posts, except: [:destroy] do

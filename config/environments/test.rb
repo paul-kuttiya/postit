@@ -34,3 +34,6 @@ PostitTemplate::Application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 end
+
+#turn off deprecation warning
+ActiveSupport::Deprecation.silenced = true
