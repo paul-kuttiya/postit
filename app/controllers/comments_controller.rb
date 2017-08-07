@@ -14,16 +14,13 @@ class CommentsController < ApplicationController
   def create
     @comment = @post.comments.build(params.require(:comment).permit(:body))
 
-    #obj to obj, id to id
-    #virtual attr creator to current_user obj
     @comment.creator = current_user
 
     if @comment.save
       flash[:notice] = "Saved comment"
-      redirect_to post_path(@post)
+      redirect_to @post
     else
-      flash[:error] = @comment.errors.full_messages
-      redirect_to post_path(@post)
+      render "/posts/show"
     end
   end
 

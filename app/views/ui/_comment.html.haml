@@ -9,14 +9,13 @@
           %small.text-primary{id: "post_votes_1"}
             = fa_icon "user-o"
             12 votes
-          = link_to "#" do
+          = link_to "#", class: "text-info" do
             = fa_icon "thumbs-o-up"
             %span.text-success +12
           = link_to "#", class: "text-danger" do
             = fa_icon "thumbs-o-down"
             %span.text-warning -13
 
-
     .btn-group.pull-right
-      = link_to "#", method: :delete, data: { confirm: 'Cannot be revoke' }, class: "btn btn-sm btn-danger" do
+      = link_to "#", method: :delete, data: { confirm: 'Cannot be revoke' }, class: "btn btn-warning btn-sm" do
         = fa_icon "trash"

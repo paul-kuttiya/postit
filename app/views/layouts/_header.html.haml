@@ -20,7 +20,7 @@
             %span.caret
           %ul.dropdown-menu
             - Category.all.each do |cat|
-              %li= link_to cat.name, category_path(cat)
+              %li= link_to cat.name.titleize, category_path(cat)
             - if logged_in? && current_user.is_admin?
               %li.divider
               %li

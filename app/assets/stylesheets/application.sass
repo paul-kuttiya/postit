@@ -21,7 +21,10 @@
 
 $list-hover: rgba(245, 245, 245, 0.55)
 
-small.author
+.title
+	padding: 0 0 0 14px
+
+.author
 	font-style: italic
 	display: inline-block	
 	width: 100%
@@ -57,8 +60,9 @@ small.author
 		.title 
 			a 
 				color: #FF4500
-		h2.text-primary, h2.post-categories
-			margin-bottom: 22px
+		.text-primary
+			a:first-of-type:hover
+				filter: brightness(70%)
 
 	.comments_title 
 		margin-top: 2em
@@ -88,3 +92,12 @@ small.author
 
 	.comment_vote
 		padding: 0.5em 0 0 0
+
+@media screen and (max-width: 415px)
+	.post
+		.text-primary
+			a:first-of-type
+				display: inline-block
+				width: 100%
+			a.btn
+				margin-top: 1em

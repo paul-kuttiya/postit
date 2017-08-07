@@ -18,4 +18,12 @@ class Post < ActiveRecord::Base
   def to_param
     self.slug
   end
+
+  def likes
+    votes.where(vote: true).length    
+  end
+
+  def dislikes
+    votes.where(vote: false).length
+  end
 end

@@ -1,25 +1,24 @@
-.post.row.clearfix
+.post
   %h2.text-primary
-    = link_to post.title, post
-  = link_to "Visit Link", post.url, class: "btn btn-default btn-sm", target: "_blank"
+    = link_to post.title.titleize, post
+    = link_to "Visit Link", post.url, class: "btn btn-info btn-sm", target: "_blank"
   %small.author.text-muted
     Submitted #{time_ago_in_words(post.created_at)} ago
     by #{link_to post.creator.username, post.creator}
   %br
-  %p.text-default= post.description
   %h2.post-categories
     = render post.categories || "<h6>No category</h6>".html_safe
   
   .post_info
     %small.text-primary{id: "post_votes_#{post.id}"}
       = fa_icon "user-o"
-      #{post.total_votes} votes
+      %small #{post.total_votes} votes
     = link_to post, class: "text-muted" do
       = fa_icon "comment-o"
       %span.text-info #{post.comments.size}
-    = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true' do
+    = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true', class: "text-info" do
       = fa_icon "thumbs-o-up"
-      %span.text-success +12
+      %span.text-success= post.likes
     = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true', class: "text-danger" do
       = fa_icon "thumbs-o-down"
-      %span.text-warning -13
+      %span.text-warning #{post.dislikes == 0 ? "0" : "-#{post.dislikes}"}

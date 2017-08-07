@@ -1,6 +1,7 @@
 .page-header
-  %h1.text-primary my portfolio
-  = link_to 'Visit URL', "#", class: "btn btn-primary btn-sm"
+  %h1.text-info 
+    My portfolio
+    = link_to 'Visit URL', "#", class: "btn btn-info btn-sm"
   %small.author.text-muted Submitted 2 days ago by user something
   %p
     Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
@@ -9,7 +10,7 @@
     %small.text-primary{id: "post_votes_1"}
       = fa_icon "user-o"
       12 votes
-    = link_to "#" do
+    = link_to "#", class: "text-info" do
       = fa_icon "thumbs-o-up"
       %span.text-success +12
     = link_to "#", class: "text-danger" do

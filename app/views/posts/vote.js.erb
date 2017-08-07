@@ -1,6 +1,8 @@
 <% if @vote.valid? %>
-  $('span#post_votes_<%= @post.id %>').text('<%= @post.total_votes %>')
+  $('#post_votes_<%= @post.id %>').find('small').text('<%= @post.total_votes %> votes');
 <% else %>
-  <% flash[:error] = 'something wrong' %>
-  window.location.reload();
+  console.log('vote error');
+  var $post = $('#post_votes_<%= @post.id %>').parents('.post');
+  
+  $alert = $('<small class="text-danger">Already voted</small>').appendTo($post).fadeOut(2000);
 <% end %>
