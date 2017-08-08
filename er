@@ -1,0 +1,15 @@
+
+[1mFrom:[0m /home/paul/Desktop/projects/postit_blog/app/views/comments/_comment.html.haml @ line 28 ActionView::CompiledTemplates#_app_views_comments__comment_html_haml___274290005797438207_69909110463100:
+
+    [1;34m23[0m: 
+    [1;34m24[0m:     %section.emotion
+    [1;34m25[0m:     - comment.votes_query[0...-1].each do |user|
+    [1;34m26[0m:       %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this,
+    [1;34m27[0m:     - [comment.votes_query.last].each do |user|
+ => [1;34m28[0m:       - binding.pry
+    [1;34m29[0m:       %small #{link_to user[:user], '#'}
+    [1;34m30[0m:       -# %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this
+    [1;34m31[0m:     - if comment.votes.length > comment.votes_query().length
+    [1;34m32[0m:       %small 
+    [1;34m33[0m:         and
+

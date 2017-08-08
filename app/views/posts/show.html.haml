@@ -1,6 +1,19 @@
 %h2.post-categories
-  = render @post.categories || "<h6>No category</h6>".html_safe
+  - if @post.categories.empty?
+    %em
+      %h6.text-muted  No category
+  -else
+    = render @post.categories
 .page-header
+  %header
+    - if @post.creator == current_user
+      = link_to edit_post_path(@post), class: "text-success" do
+        Edit
+        = fa_icon "edit"
+    - if @post.creator.is_admin?
+      = link_to "#", data: { confirm: 'Cannot be revoke' }, class: "text-danger" do
+        Delete
+        = fa_icon "trash"
   %h1.text-info 
     #{@post.title.titleize}
     = link_to 'Visit URL', @post.url, target: "_blank", class: "btn btn-info btn-sm"
@@ -22,10 +35,7 @@
       = fa_icon "thumbs-o-down"
       %span.text-warning #{@post.dislikes == 0 ? "0" : "-#{@post.dislikes}"}
 %section.emotion
-  - @post.votes_query(10).each do |user|
-    %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this,
-  - if @post.votes.length > @post.votes_query(10).length
-    %small and other #{@post.votes.length - 10} opinions
+  = render 'shared/emotion', model: @post
 
 %form.form-horizontal
   %fieldset

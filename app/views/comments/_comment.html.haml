@@ -1,26 +1,30 @@
 - show_post ||= false
 
-.comments_wrapper.clearfix
-  .pull-left
-    - if show_post
-      = link_to comment.post.title, post_path(comment.post)
+.comment
+  %header
+    - if current_user == comment.creator
+      = link_to "#", method: :delete, data: { confirm: 'Cannot be revoke' }, class: "text-danger" do
+        Delete
+        = fa_icon "trash-o"    
+    %h2.text-primary 
+      - if show_post
+        = link_to comment.post.title.titleize, post_path(comment.post)
     %p= comment.body
     %small.author.text-muted Commented #{time_ago_in_words(comment.created_at)} ago by #{link_to comment.creator.username, comment.creator}
 
-    .comment_vote{id: "comment_votes_#{comment.id}"}
-      .comment_info
-        %small.text-primary{id: "post_votes_1"}
-          = fa_icon "user-o"
-          #{comment.total_votes} votes
+  .comment_vote{id: "comment_votes_#{comment.id}"}
+    .comment_info
+      %small.text-primary{id: "post_votes_1"}
+        = fa_icon "user-o"
+        #{comment.total_votes} votes
 
-        = link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true, class: "text-info" do
-          = fa_icon "thumbs-o-up"
-          %span.text-success #{comment.likes}
+      = link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true, class: "text-info" do
+        = fa_icon "thumbs-o-up"
+        %span.text-success #{comment.likes}
 
-        = link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true, class: "text-danger" do
-          = fa_icon "thumbs-o-down"
-          %span.text-warning #{comment.dislikes == 0 ? "0" : "-#{comment.dislikes}"}
+      = link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true, class: "text-danger" do
+        = fa_icon "thumbs-o-down"
+        %span.text-warning #{comment.dislikes == 0 ? "0" : "-#{comment.dislikes}"}
 
-  .btn-group.pull-right
-    = link_to "#", method: :delete, data: { confirm: 'Cannot be revoke' }, class: "btn btn-warning btn-sm" do
-      = fa_icon "trash"
+    %section.emotion
+      = render 'shared/emotion', model: comment

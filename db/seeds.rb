@@ -1,8 +1,8 @@
-# Fabricate(:user, 
-#     username: "admin", 
-#     password: "admin", 
-#     role: "admin"
-#   )
+Fabricate(:user, 
+    username: "admin", 
+    password: "admin", 
+    role: "admin"
+  )
 
 30.times do
   Fabricate(:user)
@@ -26,16 +26,15 @@ end
   PostCategory.create(
     post: Post.all.sample, category: Category.all.sample
   )
-end
-
-2000.times do
 
   Fabricate(:comment, 
     user_id: User.all.sample.id, 
     post_id: Post.all.sample.id,
     created_at: rand(1..365).days.ago
   )
+end
 
+2000.times do
   Vote.create(
     user_id: User.all.sample.id,
     vote: [true, true, false].sample,

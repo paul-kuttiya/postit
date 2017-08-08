@@ -1,0 +1,10 @@
+- model.votes_query.each do |user|
+  - if model.votes_query.last == user
+    %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this
+  - else
+    %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this,
+- if model.votes.length > model.votes_query().length
+  %small 
+    , and
+    %small.others #{model.votes.length - model.votes_query.length} 
+    others

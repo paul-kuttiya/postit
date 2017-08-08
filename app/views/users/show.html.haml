@@ -1,6 +1,11 @@
 = render '/shared/content_title', title: "Profile #{@user.username}"
-%p
-  [#{link_to "edit_user", edit_user_path(@user)}]
+
+- if @user == current_user
+  %header
+    %h4.pull-right
+      = link_to edit_user_path(@user), class: "text-primary" do
+        Edit
+        = fa_icon "edit"
 .row
   .col-md-12.col-sm-12.profile_wrapper
     .card.hovercard
