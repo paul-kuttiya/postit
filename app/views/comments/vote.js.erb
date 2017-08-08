@@ -1,6 +1,56 @@
+var $comment_info = $('#comment_votes_<%= @comment.id %>').parents('.comment_info'),
+    $emotion = $comment_info.next('.emotion'),
+    $others = $emotion.find('.others'),
+    vote, $emoji, vote_value;
+
+// update vote by assign comment and string "like", "dislike"
+function update_vote($comment, string) {
+  var $emoji, vote_value;
+
+  if (string === 'like') {
+    $emoji = $comment.find('span.text-success');
+  } else if (string === 'dislike') {
+    $emoji = $comment.find('span.text-warning');
+  }
+
+  vote_value = parseInt($emoji.text());
+  vote_value = (string === 'like') ? vote_value += 1 : vote_value -= 1;
+  $emoji.text(vote_value);
+  
+  if (!!$others) {update_other($others);}
+}
+
+function update_other($other) {
+  var value = parseInt($other.text());
+  
+  value = value + 1
+
+  $other.text(value)
+}
+
 <% if @vote.valid? %>
-  $('span#comment_votes_<%= @comment.id %>').text('<%= @comment.total_votes %>')
+  console.log('voted');
+  vote = ('<%= @vote.vote %>' === 'true');
+  
+  //update total votes
+  $('#comment_votes_<%= @comment.id %>').find('small').text('<%= @comment.total_votes %> votes');
+  
+  //like
+  if (vote) {
+    console.log('vote is true')
+    update_vote($comment_info, 'like')
+
+  //dislike  
+  } else if (!vote) {
+    console.log('vote is false')
+    update_vote($comment_info, 'dislike')
+  }
+
 <% else %>
-  <% flash[:error] = 'something wrong' %>
-  window.location.reload();
+  console.log('already voted');
+  console.log('<%= @comment.id %>')
+  
+  $alert = $('<small class="text-danger" id="vote_alert_<%= @comment.id %>">Already voted</small>');
+  $comment_info.find("#vote_alert_<%= @comment.id %>").remove();
+  $alert.appendTo($comment_info).fadeOut(2000);
 <% end %>

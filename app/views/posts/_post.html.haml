@@ -22,12 +22,15 @@
       %small.text-primary{id: "post_votes_#{post.id}"}
         = fa_icon "user-o"
         %small #{post.total_votes} votes
+
       = link_to post, class: "text-muted" do
         = fa_icon "comment-o"
         %span.text-info #{post.comments.size}
+
       = link_to vote_post_path(post, vote: true), method: 'post', remote: 'true', class: "text-info" do
         = fa_icon "thumbs-o-up"
         %span.text-success= post.likes
+        
       = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true', class: "text-danger" do
         = fa_icon "thumbs-o-down"
         %span.text-warning #{post.dislikes == 0 ? "0" : "-#{post.dislikes}"}

@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
   before_action :set_post
   before_action :require_user
+  before_action :set_comment, only: [:vote] 
 
   def vote
-    @comment = Comment.find(params[:id])
     @vote = Vote.create(vote: params[:vote], creator: current_user, voteable: @comment)
 
     respond_to do |format|
@@ -27,5 +27,9 @@ class CommentsController < ApplicationController
   private
   def set_post
     @post = Post.find_by(slug: params[:post_id])
+  end
+
+  def set_comment
+    @comment = Comment.find(params[:id])
   end
 end

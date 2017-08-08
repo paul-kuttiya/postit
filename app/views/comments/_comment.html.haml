@@ -5,22 +5,24 @@
     - if current_user == comment.creator
       = link_to "#", method: :delete, data: { confirm: 'Cannot be revoke' }, class: "text-danger" do
         Delete
-        = fa_icon "trash-o"    
-    %h2.text-primary 
-      - if show_post
-        = link_to comment.post.title.titleize, post_path(comment.post)
+        = fa_icon "trash-o"
+    %h6    
+      %em
+        - if show_post
+          Commented on
+          = link_to comment.post.title.titleize, post_path(comment.post)
     %p= comment.body
     %small.author.text-muted Commented #{time_ago_in_words(comment.created_at)} ago by #{link_to comment.creator.username, comment.creator}
 
-  .comment_vote{id: "comment_votes_#{comment.id}"}
+  .comment_wrapper.clearfix
     .comment_info
-      %small.text-primary{id: "post_votes_1"}
+      %small.text-primary{id: "comment_votes_#{comment.id}"}
         = fa_icon "user-o"
-        #{comment.total_votes} votes
+        %small #{comment.total_votes} votes
 
       = link_to vote_post_comment_path(comment.post, comment, vote: true), method: 'post', remote: true, class: "text-info" do
         = fa_icon "thumbs-o-up"
-        %span.text-success #{comment.likes}
+        %span.text-success= comment.likes
 
       = link_to vote_post_comment_path(comment.post, comment, vote: false), method: 'post', remote: true, class: "text-danger" do
         = fa_icon "thumbs-o-down"
