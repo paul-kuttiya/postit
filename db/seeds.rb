@@ -19,12 +19,16 @@ end
     user_id: User.all.sample.id,
     created_at: rand(1..365).days.ago
   )
+
 end
 
-1500.times do
+600.times do
   PostCategory.create(
     post: Post.all.sample, category: Category.all.sample
   )
+end
+
+2000.times do
 
   Fabricate(:comment, 
     user_id: User.all.sample.id, 
