@@ -1,8 +1,8 @@
-Fabricate(:user, 
-    username: "admin", 
-    password: "admin", 
-    role: "admin"
-  )
+# Fabricate(:user, 
+#     username: "admin", 
+#     password: "admin", 
+#     role: "admin"
+#   )
 
 30.times do
   Fabricate(:user)
