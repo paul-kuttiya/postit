@@ -1,8 +1,56 @@
-<% if @vote.valid? %>
-  $('#post_votes_<%= @post.id %>').find('small').text('<%= @post.total_votes %> votes');
-<% else %>
-  console.log('vote error');
-  var $post = $('#post_votes_<%= @post.id %>').parents('.post');
+var $post_info = $('#post_votes_<%= @post.id %>').parents('.post_info'),
+    $emotion = $post_info.next('.emotion'),
+    $others = $emotion.find('.others'),
+    vote, $emoji, vote_value;
+
+// update vote by assign post and string "like", "dislike"
+function update_vote($post, string) {
+  var $emoji, vote_value;
+
+  if (string === 'like') {
+    $emoji = $post.find('span.text-success');
+  } else if (string === 'dislike') {
+    $emoji = $post.find('span.text-warning');
+  }
+
+  vote_value = parseInt($emoji.text());
+  vote_value = (string === 'like') ? vote_value += 1 : vote_value -= 1;
+  $emoji.text(vote_value);
   
-  $alert = $('<small class="text-danger">Already voted</small>').appendTo($post).fadeOut(2000);
+  if (!!$others) {update_other($others);}
+}
+
+function update_other($other) {
+  var value = parseInt($other.text());
+  
+  value = value + 1
+
+  $other.text(value)
+}
+
+<% if @vote.valid? %>
+  console.log('voted');
+  vote = ('<%= @vote.vote %>' === 'true');
+  
+  //update total votes
+  $('#post_votes_<%= @post.id %>').find('small').text('<%= @post.total_votes %> votes');
+  
+  //like
+  if (vote) {
+    console.log('vote is true')
+    update_vote($post_info, 'like')
+
+  //dislike  
+  } else if (!vote) {
+    console.log('vote is false')
+    update_vote($post_info, 'dislike')
+  }
+
+<% else %>
+  console.log('already voted');
+  console.log('<%= @post.id %>')
+  
+  $alert = $('<small class="text-danger" id="vote_alert_<%= @post.id %>">Already voted</small>');
+  $post_info.find("#vote_alert_<%= @post.id %>").remove();
+  $alert.appendTo($post_info).fadeOut(2000);
 <% end %>

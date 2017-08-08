@@ -22,3 +22,11 @@
     = link_to vote_post_path(post, vote: false), method: 'post', remote: 'true', class: "text-danger" do
       = fa_icon "thumbs-o-down"
       %span.text-warning #{post.dislikes == 0 ? "0" : "-#{post.dislikes}"}
+  %section.emotion
+    - post.votes_query.each do |user|
+      %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this,
+    - if post.votes.length > post.votes_query().length
+      %small 
+        and
+        %small.others #{post.votes.length - post.votes_query.length} 
+        others

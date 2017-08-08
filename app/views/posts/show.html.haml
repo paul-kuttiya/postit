@@ -2,7 +2,7 @@
   = render @post.categories || "<h6>No category</h6>".html_safe
 .page-header
   %h1.text-info 
-    #{@post.title}
+    #{@post.title.titleize}
     = link_to 'Visit URL', @post.url, target: "_blank", class: "btn btn-info btn-sm"
   %small.author.text-muted 
     Submitted #{time_ago_in_words(@post.created_at)} ago by #{link_to @post.creator.username, @post.creator}
@@ -21,7 +21,11 @@
     = link_to vote_post_path(@post, vote: false), method: 'post', remote: 'true', class: "text-danger" do
       = fa_icon "thumbs-o-down"
       %span.text-warning #{@post.dislikes == 0 ? "0" : "-#{@post.dislikes}"}
-
+%section.emotion
+  - @post.votes_query(10).each do |user|
+    %small #{link_to user[:user].username, user[:user]}#{user[:vote] ? '<small class="text-success"> Liked</small>'.html_safe : '<small class="text-danger"> Disliked</small>'.html_safe} this,
+  - if @post.votes.length > @post.votes_query(10).length
+    %small and other #{@post.votes.length - 10} opinions
 
 %form.form-horizontal
   %fieldset

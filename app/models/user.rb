@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
   has_secure_password validations: false
 
   validates :username, presence: true, uniqueness: true
-  #validate pass only when create new user
   validates :password, presence: true, on: :create, length: {minimum: 3}
 
   before_create :generate_slug

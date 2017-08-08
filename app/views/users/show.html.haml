@@ -16,10 +16,10 @@
       .btn-group  
         = link_to "Comments (#{@user.comments.length})", user_path(@user, tab: "comments"), class: params[:tab] == "comments" ? "btn btn-primary" : "btn btn-default"
 
-    .col-md-12.col-sm-12
-      - if params[:tab].nil?
-        - @user.posts.each do |post|
-          = render '/posts/post', post: post
-      - elsif params[:tab] == "comments"
-        - @user.comments.each do |comment|
-          = render '/comments/comment', comment: comment, show_post: true
+  .tab_details.col-md-12.col-sm-12
+    - if params[:tab].nil?
+      - @user.posts.each do |post|
+        = render '/posts/post', post: post
+    - elsif params[:tab] == "comments"
+      - @user.comments.each do |comment|
+        = render '/comments/comment', comment: comment, show_post: true

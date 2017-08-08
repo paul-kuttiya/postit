@@ -8,6 +8,8 @@ class Post < ActiveRecord::Base
   has_many :categories, -> { distinct }, through: :post_categories
   
   validates :title, :url, :description, presence: true
+  validates_uniqueness_of :title
+
 
   before_create :generate_slug
 
@@ -20,10 +22,37 @@ class Post < ActiveRecord::Base
   end
 
   def likes
-    votes.where(vote: true).length    
+    find_vote(true).length    
   end
 
   def dislikes
-    votes.where(vote: false).length
+    find_vote(false).length
+  end
+
+  def like_by
+    find_vote_users(true)
+  end
+
+  def dislike_by
+    find_vote_users(false)
+  end
+
+  def votes_query(count=10)
+    result = []
+    
+    votes.first(count).each do |vote|
+      result << {user: User.find(vote.user_id), vote: vote.vote}
+    end
+
+    result
+  end
+
+  private
+  def find_vote(boolean)
+    votes.where(vote: boolean)
+  end
+
+  def find_vote_users(boolean)
+    find_vote(boolean).map {|v| User.find(v.user_id)}
   end
 end
